@@ -8,7 +8,7 @@ const path = require('path');
 require('dotenv').config();
 require('./config/passport')(passport);
 
-const authRoute = require('./users/route');
+const authRoute = require('./auth/route');
 
 const app = express();
 const PORT = process.env.PORT || 8080;

@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 const passport = require('passport');
 
-class UsersController {
+class AuthController {
   async login(req, res, next) {
     console.log(req.body);
     passport.authenticate('local', (err, user, info) => {
@@ -24,4 +24,4 @@ class UsersController {
   }
 }
 
-module.exports = UsersController;
+module.exports = AuthController;
