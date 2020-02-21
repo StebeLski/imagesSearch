@@ -6,6 +6,7 @@ class SearchedImagesRepository {
     const insert = 'INSERT INTO searched_images (query, user_id) VALUES (?,?)';
     return db.run(insert, [historyQuery, userId], (err) => {
       if (err) {
+        console.log('tru');
         return new Error();
       }
     });

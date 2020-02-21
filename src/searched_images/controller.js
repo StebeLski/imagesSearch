@@ -4,17 +4,26 @@
 const SearchedImagesService = require('./service');
 
 const service = new SearchedImagesService();
+
 class SearchedImagesController {
-  search(req, res, next) {
+  async search(req, res, next) {
     const { q } = req.query;
     if (!q) {
       return res.render('search');
     }
-    service.createHistorySearchRecord({ historyQuery: q, user: req.user });
-    return res.render('search', { gifs: 'kek' });
+
+    await service.createHistorySearchRecord({
+      historyQuery: q,
+      user: req.user,
+    });
+    const searchedGifs = await service.callPicturesApi({
+      q: encodeURIComponent(q),
+    });
+    console.log('GIFS', searchedGifs);
+    return res.render('search', { gifs: searchedGifs });
   }
 
   searchedImages() {}
 }
 
-module.exports = SearchedImagesController;
+module.exports = new SearchedImagesController();
