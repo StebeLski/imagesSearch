@@ -14,6 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // express session
 app.use(
   session({
@@ -33,12 +35,14 @@ app.engine(
 );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+const publicDirectoryPath = path.join(__dirname, '/public');
+app.use(express.static(publicDirectoryPath));
 
 // passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', authRoute);
+app.use('/', authRoute);
 
 app.listen(PORT, () => {
   console.log(`server up on http://localhost:${PORT}/`);

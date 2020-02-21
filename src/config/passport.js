@@ -7,7 +7,6 @@ module.exports = (passport) => {
     new LocalStrategy(
       { usernameField: 'name', passwordField: 'password' },
       (username, password, done) => {
-        console.log(password);
         const sql = `SELECT id, name, password
                    FROM users
                    WHERE name = ?`;
@@ -23,7 +22,6 @@ module.exports = (passport) => {
               const { password: removePass, ...rowdata } = row;
               return done(null, rowdata);
             }
-            console.log('pass inncorect');
             return done(null, false, {
               message: 'Password incorrect',
             });
