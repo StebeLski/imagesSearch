@@ -1,4 +1,5 @@
 const db = require('../db');
+const knex = require('../db/knex');
 
 class SearchedImagesRepository {
   static async create(params) {
@@ -13,12 +14,8 @@ class SearchedImagesRepository {
 
   static async getAllUserRecords(params) {
     const { userId } = params;
-    const select = 'SELECT * FROM searched_images WHERE user_id = ?';
-    return db.all(select, [userId], (err, rows) => {
-      if (err) {
-        return new Error();
-      }
-    });
+    const data = await knex('searched_images').where({ user_id: userId });
+    return data;
   }
 }
 

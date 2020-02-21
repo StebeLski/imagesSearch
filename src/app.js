@@ -46,6 +46,11 @@ app.use(passport.session());
 app.use('/', authRoute);
 app.use('/images', searchImages);
 
+// error handler
+app.use((err, req, res) => {
+  res.render('error', { code: err.code, message: err.message });
+});
+
 app.listen(PORT, () => {
   console.log(`server up on http://localhost:${PORT}/`);
 });

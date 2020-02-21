@@ -13,7 +13,10 @@ class AuthController {
         return next(err);
       }
       if (!user) {
-        return res.send('no user OBJECT returned');
+        return res.render('error', {
+          code: 403,
+          message: 'No user with this creds',
+        });
       }
       req.logIn(user, (err) => {
         if (err) {
