@@ -9,6 +9,7 @@ require('dotenv').config();
 require('./config/passport')(passport);
 
 const authRoute = require('./auth/route');
+const searchImages = require('./searched_images/route');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -35,7 +36,7 @@ app.engine(
 );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-const publicDirectoryPath = path.join(__dirname, '/public');
+const publicDirectoryPath = path.join(__dirname, '../public/');
 app.use(express.static(publicDirectoryPath));
 
 // passport middleware
@@ -43,6 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', authRoute);
+app.use('/images', searchImages);
 
 app.listen(PORT, () => {
   console.log(`server up on http://localhost:${PORT}/`);

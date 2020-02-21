@@ -7,8 +7,8 @@ class AuthController {
   async login(req, res, next) {
     console.log(req.body);
     passport.authenticate('local', (err, user, info) => {
-      console.log(user);
-      console.log(info);
+      console.log('USER', user);
+      console.log('INFO', info);
       if (err) {
         return next(err);
       }
@@ -19,7 +19,6 @@ class AuthController {
         if (err) {
           return next(err);
         }
-        console.log('as');
         return res.redirect('/images');
       });
     })(req, res, next);
