@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
+const hbs = require('express-handlebars');
+const path = require('path');
 
 require('dotenv').config();
 require('./config/passport')(passport);
@@ -20,6 +22,17 @@ app.use(
     saveUninitialized: true,
   }),
 );
+
+app.engine(
+  'hbs',
+  hbs({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, '/views/layouts/'),
+  }),
+);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 // passport middleware
 app.use(passport.initialize());

@@ -1,6 +1,7 @@
-const passport = require('passport');
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
+const passport = require('passport');
+
 class UsersController {
   async login(req, res, next) {
     console.log(req.body);
