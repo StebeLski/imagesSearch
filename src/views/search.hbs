@@ -1,11 +1,22 @@
-<nav><a href="/images">Search Image</a> | <a href="/history">Your searched history</a> |
-</nav>
-<h1>Search for GIFS</h1>
-<form action="/images">
-  <input type="text" name="q">
-  <button type="submit">Search</button>
-</form>
-{{!-- we use a fixed_height version so all the gifs are the same height --}}
-{{#each gifs}}
-<img src="{{this.images.fixed_height.url}}" alt="">
-{{/each}}
+<header>
+  <h1>Search for GIFS</h1>
+</header>
+<main>
+  <nav class="navbar"><a href="/images">Search Image</a> | <a href="/images/searchedimages">Your searched history</a>
+  </nav>
+  <form action="/images">
+    <input type="text" name="q" class="search-input">
+    <button type="submit">Search</button>
+  </form>
+  <div class="content__container">
+    {{#each gifs}}
+    <div class="image__container">
+      <img src="{{this.images.fixed_height.url}}" alt="">
+      <div class="like__container">
+        <span>Like</span>
+        <button><i class="fa fa-heart-o"></i></button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</main>

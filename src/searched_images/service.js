@@ -25,6 +25,15 @@ class SearchedImagesRecordService {
       return error;
     }
   }
+
+  async getHistoryLog(params) {
+    const { userId } = params;
+    const allUserHistoryRecords = await SearchedImagesRepository.getAllUserRecords(
+      { userId },
+    );
+    console.log('allUserHistoryRecords', allUserHistoryRecords);
+    return allUserHistoryRecords;
+  }
 }
 
 module.exports = SearchedImagesRecordService;

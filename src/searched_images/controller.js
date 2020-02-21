@@ -23,7 +23,12 @@ class SearchedImagesController {
     return res.render('search', { gifs: searchedGifs });
   }
 
-  searchedImages() {}
+  async searchedImages(req, res, next) {
+    const getHistoryRecords = await service.getHistoryLog({
+      userId: req.user.id,
+    });
+    res.send(getHistoryRecords);
+  }
 }
 
 module.exports = new SearchedImagesController();
