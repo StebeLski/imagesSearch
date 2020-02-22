@@ -14,7 +14,9 @@ class SearchedImagesRepository {
 
   static async getAllUserRecords(params) {
     const { userId } = params;
-    const data = await knex('searched_images').where({ user_id: userId });
+    const data = await knex('searched_images')
+      .where({ user_id: userId })
+      .orderBy('created_at', 'desc');
     return data;
   }
 }
