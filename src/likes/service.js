@@ -1,17 +1,17 @@
 /* eslint-disable class-methods-use-this */
 const axios = require('axios');
 const SearchedImagesRepository = require('./repository');
-// TODO spit one service to many where each one has one responsobility
+// TODO split one service to many where each one has one responsobility
 class SearchedImagesRecordService {
-  async createHistorySearchRecord(params) {
-    const { historyQuery, userId } = params;
+  async createAddLike(params) {
+    const { imageId, userId } = params;
     await SearchedImagesRepository.create({
-      historyQuery,
+      imageId,
       userId,
     });
   }
 
-  async callPicturesApi(params) {
+  async callPicturesApiForUsersLikes(params) {
     const { q } = params;
     try {
       const alert = await axios.get(
@@ -23,7 +23,7 @@ class SearchedImagesRecordService {
     }
   }
 
-  async getHistoryLog(params) {
+  async getAllLikes(params) {
     const { userId } = params;
     const allUserHistoryRecords = await SearchedImagesRepository.getAllUserRecords(
       { userId },

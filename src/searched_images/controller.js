@@ -14,12 +14,11 @@ class SearchedImagesController {
 
     await service.createHistorySearchRecord({
       historyQuery: q,
-      user: req.user,
+      userId: req.user.id,
     });
     const searchedGifs = await service.callPicturesApi({
       q: encodeURIComponent(q),
     });
-    console.log('GIFS', searchedGifs);
     return res.render('search', { gifs: searchedGifs });
   }
 

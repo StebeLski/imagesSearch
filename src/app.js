@@ -9,7 +9,8 @@ require('dotenv').config();
 require('./config/passport')(passport);
 
 const authRoute = require('./auth/route');
-const searchImages = require('./searched_images/route');
+const searchImagesRoute = require('./searched_images/route');
+const likesRoute = require('./likes/route');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -46,7 +47,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', authRoute);
-app.use('/images', searchImages);
+app.use('/images', searchImagesRoute);
+app.use('/likes', likesRoute);
 
 // error handler
 app.use((err, req, res, next) => {
