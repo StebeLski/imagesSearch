@@ -36,8 +36,10 @@ app.engine(
 );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-const publicDirectoryPath = path.join(__dirname, '../public/');
-app.use(express.static(publicDirectoryPath));
+// const publicDirectoryPath = path.join(__dirname, '../public/');
+// app.use(express.static(publicDirectoryPath));
+app.use(express.static('public'));
+app.use('/images', express.static('public'));
 
 // passport middleware
 app.use(passport.initialize());
@@ -47,7 +49,7 @@ app.use('/', authRoute);
 app.use('/images', searchImages);
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.render('error', { code: err.code, message: err.message });
 });
 

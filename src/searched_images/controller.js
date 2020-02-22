@@ -27,7 +27,10 @@ class SearchedImagesController {
     const getHistoryRecords = await service.getHistoryLog({
       userId: req.user.id,
     });
-    res.send(getHistoryRecords);
+    res.render('recordshistory', {
+      records: getHistoryRecords,
+      layout: 'basic',
+    });
   }
 }
 

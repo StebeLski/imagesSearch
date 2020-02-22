@@ -31,8 +31,12 @@ class SearchedImagesRecordService {
     const allUserHistoryRecords = await SearchedImagesRepository.getAllUserRecords(
       { userId },
     );
-    console.log('allUserHistoryRecords', allUserHistoryRecords);
-    return allUserHistoryRecords;
+    const queryData = allUserHistoryRecords.reduce((a, b) => {
+      const { id, user_id, ...query } = b;
+      a.push(query);
+      return a;
+    }, []);
+    return queryData;
   }
 }
 
