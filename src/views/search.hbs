@@ -1,0 +1,56 @@
+<header>
+  <h1>Search for GIFS</h1>
+</header>
+<main>
+  <nav class="navbar"><a href="/images">Search Image</a> |
+    <a href="/images/searchedimages"> Your searched history</a> |
+    <a href="/likes"> Your liked history</a>
+    <a href="/logout" style="float: right;">EXIT</a>
+  </nav>
+  <form action="/images">
+    <input type="text" name="q" class="search-input">
+    <button type="submit">Search</button>
+  </form>
+  <div class="content__container">
+    {{#each gifs}}
+    <div class="image__container">
+      <img src="{{this.images.fixed_height.url}}" alt="">
+      <div class="like__container">
+
+        {{#if this.isUserLiked}}
+        <span>You liked it</span>
+        {{else}}
+        <span>Like</span>
+        <span style="display: none">{{this.id}}</span>
+        <button onClick="ff(event.target)">♥</button>
+        {{/if}}
+
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+
+  <script>
+
+    function ff(element) {
+      const externalImageId = element.parentNode.children[1].innerHTML;
+
+
+      const data = JSON.stringify({ imageId: externalImageId });
+      const request = new XMLHttpRequest();
+      request.open("POST", "/likes", true)
+
+      request.setRequestHeader("Content-Type", "application/json");
+      request.addEventListener("load", function () {
+      });
+      request.send(data);
+
+      element.remove();
+    }
+
+
+
+  </script>
+
+</main>

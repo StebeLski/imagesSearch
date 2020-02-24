@@ -1,0 +1,19 @@
+<header>
+  <h1>Search for GIFS</h1>
+</header>
+<main>
+  <nav class="navbar"><a href="/images">Liked Images</a> |
+    <a href="/images/searchedimages"> Your searched history</a> |
+    <a href="/likes"> Your liked history</a>
+  </nav>
+  <div class="content__container">
+    {{#each gifs}}
+    <div class="image__container">
+      <img src="{{this.images.fixed_height.url}}" alt="">
+      <div class="like__container">
+        <span>You liked it</span>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</main>
