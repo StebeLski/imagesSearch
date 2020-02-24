@@ -12,7 +12,7 @@ class SearchedImagesRepository {
     });
   }
 
-  static async getAllUserRecords(params) {
+  static async getAllUserLikes(params) {
     const { userId } = params;
     const data = await knex('searched_images')
       .where({ user_id: userId })
