@@ -4,7 +4,7 @@ const LikesRepository = require('./repository');
 class SearchedImagesRecordService {
   async createAddLike(params) {
     const { imageId, userId } = params;
-    await LikesRepository.create({
+    await LikesRepository.createAddLike({
       imageId,
       userId,
     });
@@ -15,6 +15,7 @@ class SearchedImagesRecordService {
     const allUserLikesRecords = await LikesRepository.getAllUserLikes({
       userId,
     });
+    console.log(allUserLikesRecords);
   }
 }
 

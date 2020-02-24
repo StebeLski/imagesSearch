@@ -8,8 +8,9 @@ class LikesController {
   checklikes = async (req, res, next) => {};
 
   addlike = async (req, res, next) => {
+    console.log(req.body);
     await this.service.createAddLike({
-      imageId: req.body.imageid,
+      imageId: req.body.imageId,
       userId: req.user.id,
     });
   };

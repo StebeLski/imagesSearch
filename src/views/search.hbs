@@ -16,9 +16,35 @@
       <img src="{{this.images.fixed_height.url}}" alt="">
       <div class="like__container">
         <span>Like</span>
-        <button onclick=""><i class="fa fa-heart-o"></i></button>
+        <span class="test">{{this.id}}</span>
+        <button onClick="ff(event.target)">♥</button>
       </div>
     </div>
     {{/each}}
   </div>
+
+
+  <script>
+
+    function ff(element) {
+      const externalImageId = element.parentNode.children[1].innerHTML;
+
+
+      let data = JSON.stringify({ imageId: externalImageId });
+      const request = new XMLHttpRequest();
+      request.open("POST", "/likes", true)
+
+      request.setRequestHeader("Content-Type", "application/json");
+      request.addEventListener("load", function () {
+        console.log('ky')
+      });
+      request.send(data);
+
+      element.remove();
+    }
+
+
+
+  </script>
+
 </main>

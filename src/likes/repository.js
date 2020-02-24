@@ -3,6 +3,7 @@ const knex = require('../db/knex');
 
 class SearchedImagesRepository {
   static async createAddLike(params) {
+    console.log(params);
     const { imageId, userId } = params;
     const insert = 'INSERT INTO likes (external_id, user_id) VALUES (?,?)';
     return db.run(insert, [imageId, userId], (err) => {
@@ -14,9 +15,7 @@ class SearchedImagesRepository {
 
   static async getAllUserLikes(params) {
     const { userId } = params;
-    const data = await knex('searched_images')
-      .where({ user_id: userId })
-      .orderBy('created_at', 'desc');
+    const data = await knex('likes').where({ user_id: userId });
     return data;
   }
 }
