@@ -23,7 +23,6 @@ class SearchedImagesRecordService {
 
   getLikedImagesFromApi = async (gifsIdxs) => {
     const gifsIdxStr = gifsIdxs.join(',');
-    console.log(gifsIdxStr);
     try {
       const likedImagesFromGiphy = await axios.get(
         `http://api.giphy.com/v1/gifs?ids=${gifsIdxStr}&api_key=${process.env.APIKEYFROMGIPHY}`,
@@ -32,6 +31,17 @@ class SearchedImagesRecordService {
     } catch (error) {
       return error;
     }
+  };
+
+  compareLikedAndSearched = (params) => {
+    const { userliked, searchedGifs } = params;
+    const mappedLikedGifs = searchedGifs.map((searchedGif) => {
+      if (userliked.some((likedGif) => searchedGif.id === likedGif)) {
+        searchedGif.isUserLiked = true;
+      } else searchedGif.isUserLiked = false;
+      return searchedGif;
+    });
+    return mappedLikedGifs;
   };
 }
 

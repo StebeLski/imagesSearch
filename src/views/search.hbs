@@ -15,9 +15,15 @@
     <div class="image__container">
       <img src="{{this.images.fixed_height.url}}" alt="">
       <div class="like__container">
+
+        {{#if this.isUserLiked}}
+        <span>You liked it</span>
+        {{else}}
         <span>Like</span>
-        <span class="test">{{this.id}}</span>
+        <span style="display: none">{{this.id}}</span>
         <button onClick="ff(event.target)">♥</button>
+        {{/if}}
+
       </div>
     </div>
     {{/each}}
@@ -30,13 +36,12 @@
       const externalImageId = element.parentNode.children[1].innerHTML;
 
 
-      let data = JSON.stringify({ imageId: externalImageId });
+      const data = JSON.stringify({ imageId: externalImageId });
       const request = new XMLHttpRequest();
       request.open("POST", "/likes", true)
 
       request.setRequestHeader("Content-Type", "application/json");
       request.addEventListener("load", function () {
-        console.log('ky')
       });
       request.send(data);
 

@@ -5,7 +5,6 @@ const passport = require('passport');
 
 class AuthController {
   async login(req, res, next) {
-    console.log(req.body);
     passport.authenticate('local', (err, user, info) => {
       console.log('USER', user);
       console.log('INFO', info);

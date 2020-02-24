@@ -25,6 +25,8 @@ const db = new sqlite3.Database(DBSOURCE, (error) => {
           // Table just created, creating some rows
           const insert = 'INSERT INTO users (name, password) VALUES (?,?)';
           db.run(insert, ['test', bcrypt.hashSync('test', 10)]);
+          db.run(insert, ['user', bcrypt.hashSync('user', 10)]);
+          db.run(insert, ['user1', bcrypt.hashSync('user1', 10)]);
         }
       },
     );

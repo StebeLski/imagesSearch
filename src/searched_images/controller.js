@@ -2,12 +2,14 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 const SearchedImagesService = require('./service');
+const LikedImagesService = require('../likes/service');
 
 // const service = new SearchedImagesService();
 
 class SearchedImagesController {
   constructor() {
     this.service = new SearchedImagesService();
+    this.likedImageService = new LikedImagesService();
   }
 
   search = async (req, res, next) => {
@@ -23,6 +25,16 @@ class SearchedImagesController {
     const searchedGifs = await this.service.callPicturesApi({
       q: encodeURIComponent(q),
     });
+
+    const userLikedGifs = await this.likedImageService.getAllUsersLikes({
+      userId: req.user.id,
+    });
+
+    const filteredGifs = this.likedImageService.compareLikedAndSearched({
+      userliked: userLikedGifs,
+      searchedGifs,
+    });
+
     return res.render('search', { gifs: searchedGifs });
   };
 

@@ -9,7 +9,6 @@ class LikesController {
     const usersLikes = await this.service.getAllUsersLikes({
       userId: req.user.id,
     });
-    console.log(usersLikes);
     const getLikedImagesFromApi = await this.service.getLikedImagesFromApi(
       usersLikes,
     );
