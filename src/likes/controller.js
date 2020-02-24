@@ -5,10 +5,18 @@ class LikesController {
     this.service = new SearchedImagesService();
   }
 
-  checklikes = async (req, res, next) => {};
+  allUsersLikes = async (req, res, next) => {
+    const usersLikes = await this.service.getAllUsersLikes({
+      userId: req.user.id,
+    });
+    console.log(usersLikes);
+    const getLikedImagesFromApi = await this.service.getLikedImagesFromApi(
+      usersLikes,
+    );
+    return res.render('likedimages', { gifs: getLikedImagesFromApi });
+  };
 
   addlike = async (req, res, next) => {
-    console.log(req.body);
     await this.service.createAddLike({
       imageId: req.body.imageId,
       userId: req.user.id,

@@ -4,7 +4,7 @@ const router = express.Router();
 const controller = require('./controller');
 const { isLoggedIn } = require('../middlewars');
 
+router.get('/', isLoggedIn, controller.allUsersLikes);
 router.post('/', isLoggedIn, controller.addlike);
-router.get('/', isLoggedIn, controller.checklikes);
 
 module.exports = router;
