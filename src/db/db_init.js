@@ -51,9 +51,8 @@ const db = new sqlite3.Database(DBSOURCE, (error) => {
       `CREATE TABLE likes (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       user_id INTEGER,
-      external_id TEXT UNIQUE,
+      external_id TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-      CONSTRAINT external_id_unique UNIQUE (external_id),
       CONSTRAINT Likes_fk_user_id FOREIGN KEY (user_id)
       REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE)`,
       (err) => {

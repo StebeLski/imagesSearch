@@ -16,9 +16,9 @@ class SearchedImagesRecordService {
     const allUserLikesRecords = await LikesRepository.getAllUserLikes({
       userId,
     });
-    const gifs = toOneArray(allUserLikesRecords);
+    const likedGifs = toOneArray(allUserLikesRecords);
 
-    return gifs;
+    return likedGifs;
   };
 
   getLikedImagesFromApi = async (gifsIdxs) => {

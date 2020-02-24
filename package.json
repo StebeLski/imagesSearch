@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db-init": "node src/db/db_init.js"
+    "db-init": "node src/db/db_init.js",
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,6 @@
     "knex": "^0.20.10",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "sqlite": "^3.0.3",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {

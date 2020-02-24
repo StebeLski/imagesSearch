@@ -9,9 +9,14 @@ class LikesController {
     const usersLikes = await this.service.getAllUsersLikes({
       userId: req.user.id,
     });
-    const getLikedImagesFromApi = await this.service.getLikedImagesFromApi(
-      usersLikes,
-    );
+    let getLikedImagesFromApi = '';
+    if (usersLikes.length !== 0) {
+      getLikedImagesFromApi = await this.service.getLikedImagesFromApi(
+        usersLikes,
+      );
+    } else {
+      getLikedImagesFromApi = '';
+    }
     return res.render('likedimages', { gifs: getLikedImagesFromApi });
   };
 
