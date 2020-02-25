@@ -12,7 +12,7 @@ class SearchedImagesController {
     this.likedImageService = new LikedImagesService();
   }
 
-  search = async (req, res, next) => {
+  async search(req, res, next) {
     const { q } = req.query;
     if (!q) {
       return res.render('search');
@@ -36,9 +36,9 @@ class SearchedImagesController {
     });
 
     return res.render('search', { gifs: searchedGifs });
-  };
+  }
 
-  searchedImages = async (req, res, next) => {
+  async searchedImages(req, res, next) {
     const getHistoryRecords = await this.service.getHistoryLog({
       userId: req.user.id,
     });
@@ -46,7 +46,7 @@ class SearchedImagesController {
       records: getHistoryRecords,
       layout: 'basic',
     });
-  };
+  }
 }
 
 module.exports = new SearchedImagesController();
